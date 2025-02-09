@@ -1,0 +1,55 @@
+﻿@model auto_tasker.Models.Task
+
+@{
+    ViewData["Title"] = "Edit Task";
+}
+
+<h2>Edit Task</h2>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label for="Title">Title</label>
+        <input type="text" class="form-control" id="Title" name="Title" value="@Model.Title" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea class="form-control" id="Description" name="Description" required>@Model.Description</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="DueDate">Due Date</label>
+        <input type="date" class="form-control" id="DueDate" name="DueDate" value="@Model.DueDate.ToString("yyyy-MM-dd")" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Priority">Priority</label>
+        <select class="form-control" id="Priority" name="Priority" asp-for="Priority" required>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Status">Status</label>
+        <select class="form-control" id="Status" name="Status" asp-for="Status" required>
+            <option value="Pending">Pending</option>
+            <option value="InProgress">In Progress</option>
+            <option value="Completed">Completed</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="CreatedAt">Created At</label>
+        <input type="text" class="form-control" id="CreatedAt" value="@Model.CreatedAt.ToString("MM/dd/yyyy")" disabled />
+    </div>
+
+    <div class="form-group">
+        <label for="UpdatedAt">Updated At</label>
+        <input type="text" class="form-control" id="UpdatedAt" value="@Model.UpdatedAt.ToString("MM/dd/yyyy")" disabled />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Cancel</a>
+</form>

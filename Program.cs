@@ -1,6 +1,13 @@
+using auto_tasker.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add DbContext to the container
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Add controllers with views
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -14,16 +21,14 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseRouting();
+app.UseStaticFiles();  // Corrected to use standard static files middleware
 
+app.UseRouting();
 app.UseAuthorization();
 
-app.MapStaticAssets();
-
+// Map controller routes
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
-
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

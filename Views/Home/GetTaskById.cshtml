@@ -1,0 +1,46 @@
+﻿@model auto_tasker.Models.Task
+
+@{
+    ViewData["Title"] = "Task Details";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="task-details">
+    <h3>Task Information</h3>
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <td>@Model.Title</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>@Model.Description</td>
+        </tr>
+        <tr>
+            <th>Due Date</th>
+            <td>@Model.DueDate.ToString("MMMM dd, yyyy")</td>
+        </tr>
+        <tr>
+            <th>Priority</th>
+            <td>@Model.Priority</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>@Model.Status</td>
+        </tr>
+        <tr>
+            <th>Created At</th>
+            <td>@Model.CreatedAt.ToString("MMMM dd, yyyy hh:mm tt")</td>
+        </tr>
+        <tr>
+            <th>Updated At</th>
+            <td>@Model.UpdatedAt.ToString("MMMM dd, yyyy hh:mm tt")</td>
+        </tr>
+    </table>
+</div>
+
+<div class="action-buttons">
+    <a href="@Url.Action("EditTask", new { id = Model.Id })" class="btn btn-primary">Edit Task</a>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Task List</a>
+</div>
